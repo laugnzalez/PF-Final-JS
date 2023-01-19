@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar is-warning" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="#">
+                    Compra-ME
+                </a>
+
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+                    data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+
+            <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item">
+                        Home
+                    </a>
+
+                    <a class="navbar-item">
+                        Productos
+                    </a>
+
+                    <a class="navbar-item">
+                        Carrito
+                    </a>
+
+                    <a class="navbar-item">
+                        Contacto
+                    </a>
+                </div>
+            </div>
+
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <a class="button is-link">
+                        <i class="bi bi-moon-fill"></i>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section id="home" class="section">
+        <div class="container" >
+                <div class="swiper mySwiper">
+                    <div id="carousel" class="swiper-wrapper">
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+        </div> 
+    </section>
+
+    <section id="productos" class="section">
+
+    </section>
+
+    <section id="carrito" class="section">
+        <div class="container">
+
+        </div>
+    </section>
+
+    <section id="contacto" class="section">
+        <div class="container">
+            <h2>Contactate con nosotros</h2>
+            <form id="formulario-contacto" action="" class="form">
+                <input id="input-nombre" type="text" placeholder="Juan">
+                <input id="input-mail" type="text" placeholder="alguien@example.com">
+                <input id="input-comment" type="text" placeholder="Dejanos lo que quieras!">
+                <input id="envio-formulario" type="submit" value="Enviar">
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer has-background-warning">
+        <div class="container">
+            <p>Esta web fue realizada por <a href="http://github.com/laugnzalez">Lautaro Gonzalez</a>
+            </p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="index.js"></script>
+    <script src="theme.js"></script>
+
+</body>
+
+</html>
