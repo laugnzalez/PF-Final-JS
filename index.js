@@ -8,13 +8,42 @@ const seccionCarrito = document.querySelector("#carrito")
 const seccionContacto = document.querySelector("#contacto")
 
 // ELEMENTOS
+
 const divCarousel = document.querySelector("#carousel")
+const btnHome = document.querySelector("#btnHome")
+const btnProductos = document.querySelector("#btnProductos")
+const btnCheckout = document.querySelector("#btnCheckout")
+const btnContacto = document.querySelector("#btnContacto")
+const divCards = document.querySelector("#cardsContainer")
 
 
 //////////////FUNCIONES GENÉRICAS REUTILIZABLES////////////////
 
+let hideElements = (element) => {
+    element.style.display = "none"
+}
+
+let showElements = (element) => {
+    element.style.display = "none"
+}
+
+let nuevoDatoLocal = (clave, valor) => {
+    localStorage.setItem(clave, valor)
+}
+
+let obtenerDatoLocal = (clave) => {
+    let datos = localStorage.getItem(clave)
+    let datosParseados = JSON.parse(datos)
+    return datosParseados
+}
+
+let borrarDatoLocal = (clave) => {
+    localStorage.clear(clave)
+}
 
 ///////////// FUNCIONES ESPECIFICAS////////////////////
+
+// FUNCION HTML CAROUSEL 
 
 const carousel = (array) => {
     const imagenes = array.reduce((acc, element) => {
@@ -27,14 +56,15 @@ const carousel = (array) => {
     divCarousel.innerHTML = imagenes
 }
 
+// PETICION IMAGENES CAROUSEL
+
 fetch('https://fakestoreapi.com/products/category/jewelery?limit=5')
     .then(res => res.json())
     .then(productosCarousel => {
-        console.log(productosCarousel)
         carousel(productosCarousel)
     })
 
-//SWIPER CAROUSEL
+// INICIAR CAROUSEL SWIPER
 
 const swiper = new Swiper('.swiper', {
     autoplay: true,
@@ -46,37 +76,45 @@ const swiper = new Swiper('.swiper', {
 });
 
 
-//AGREGAR PRODUCTOS A LA SECCION PRODUCTOS A TRAVES DEL DOM
+//CONSTRUCCION DE LAS CARDS CON LOS PRODUCTOS
 
 const cards = (array) => {
     const nodos = array.reduce((acc, element) => {
-        return acc + `<div class="card">
-            <div class="container"
-            <div class="card-header">
-            <h3 class="card-header-title">${element.title}</h3>
-            </div>
+        return acc + `
+        <div class="column card is-one-quarter">
+            <header class="card-header">
+                <p class="card-header-title">
+                    ${element.title}
+                </p>
+            </header>
+
             <div class="card-image">
-            <img src="${element.image}" alt="${element.title}" style="height: 200px"
+                <figure class="image">
+                    <img src="${element.image}" alt=" ${element.title}">
+                </figure>
             </div>
+
             <div class="card-content">
-            <p>${element.description}</p>
+                <div class="content">
+                    ${element.description}
+                </div>
             </div>
-            <div class="card-footer">
-            <p class="card-footer-item">US$ ${element.price}</p>
-            <button class="card-footer-item" id="btnAddToCart">Añadir al carrito</button>
-            </div>
-            </div>
-            <div>`
+
+            <footer class="card-footer">
+                <p class="card-footer-item">$ ${element.price}</p>
+                <button class="card-footer-item has-background-primary">Añadir al carrito</button>
+            </footer>
+        </div>
+`
     }, "")
-    seccionProductos.innerHTML = nodos
+    divCards.innerHTML = nodos
 }
 
-// PETICION A LA API DE FAKESTORE
+// PETICION DEL ARRAY DE PRODUCTOS
 
 fetch('https://fakestoreapi.com/products')
     .then(res => res.json())
     .then(data => {
-        console.log(data)
         cards(data)
     })
     .catch((error) => console.log("Oops! Algo salió mal."))
