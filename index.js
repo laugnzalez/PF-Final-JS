@@ -24,7 +24,7 @@ let hideElements = (element) => {
 }
 
 let showElements = (element) => {
-    element.style.display = "none"
+    element.style.display = "block"
 }
 
 let nuevoDatoLocal = (clave, valor) => {
@@ -43,13 +43,33 @@ let borrarDatoLocal = (clave) => {
 
 ///////////// FUNCIONES ESPECIFICAS////////////////////
 
-// FUNCION HTML CAROUSEL 
+// MOSTRAR U OCULTAR SECCIONES DE LA WEB
+
+btnHome.onclick = () => {
+
+}
+
+btnProductos.onclick = () => {
+
+}
+
+btnCheckout.onclick = () => {
+
+}
+
+btnContacto.onclick = () => {
+
+}
+
+// HTML CAROUSEL 
 
 const carousel = (array) => {
     const imagenes = array.reduce((acc, element) => {
         return acc + `
         <div class="swiper-slide">
+        <figure class="image is-centered is-2by1">
         <img src="${element.image}"> <alt="${element.title}>
+        </figure>
         </div>
         `
     }, "")
