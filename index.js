@@ -46,19 +46,19 @@ let borrarDatoLocal = (clave) => {
 // MOSTRAR U OCULTAR SECCIONES DE LA WEB
 
 btnHome.onclick = () => {
-
+    hideElements(seccionHome)
 }
 
 btnProductos.onclick = () => {
-
+    showElements(seccionProductos)
 }
 
 btnCheckout.onclick = () => {
-
+    showElements(seccionCarrito)
 }
 
 btnContacto.onclick = () => {
-
+    showElements(seccionContacto)
 }
 
 // HTML CAROUSEL 
