@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Compra-ME</title>
     <link rel="stylesheet" href="css/estilos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
 
@@ -29,7 +29,7 @@
 
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
-                    <a class="navbar-item" id="btnHome">
+                    <a class="navbar-item" id="btn-home">
                         <div class="icon-text">
                             <span>Home</span>
                             <span class="icon">
@@ -38,7 +38,7 @@
                         </div>
                     </a>
 
-                    <a class="navbar-item" id="btnProductos">
+                    <a class="navbar-item" id="btn-productos">
                         <div class="icon-text">
                             <span>Productos</span>
                             <span class="icon">
@@ -47,7 +47,7 @@
                         </div>
                     </a>
 
-                    <a class="navbar-item" id="btnCheckout">
+                    <a class="navbar-item" id="btn-checkout">
                         <div class="icon-text">
                             <span>Carrito</span>
                             <span class="icon">
@@ -56,7 +56,7 @@
                         </div>
                     </a>
 
-                    <a class="navbar-item" id="btnContacto">
+                    <a class="navbar-item" id="btn-contacto">
                         <div class="icon-text">
                             <span>Contacto</span>
                             <span class="icon">
@@ -69,12 +69,12 @@
 
             <div class="navbar-end">
                 <div class="navbar-item">
-                    <a class="button is-link" id="btnDark">
+                    <a class="button is-link" id="btn-dark">
                         <i class="bi bi-moon-fill"></i>
                     </a>
                 </div>
-                 <div class="navbar-item">
-                     <a class="button " id="btnLight">
+                <div class="navbar-item">
+                    <a class="button " id="btn-light">
                         <i class="bi bi-sun-fill"></i>
                     </a>
                 </div>
@@ -83,30 +83,42 @@
     </header>
     <section id="home" class="section">
         <div class="container">
+            <h2 class="title">Home</h2>
             <div class="swiper mySwiper">
                 <div id="carousel" class="swiper-wrapper">
 
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
+            <div id="most-buyed-container" class="columns is-multiline">
+
+            </div>
         </div>
     </section>
 
     <section id="productos" class="section">
-        <div id="cardsContainer" class="columns is-multiline">
+        <div class="container">
+            <h2 class="title">Todos nuestros productos</h2>
+            <span ><button id="btn-sort-u" class="button is-primary">A-Z</button></span>
+            <span><button id="btn-sort-d" class="button is-primary">Z-A</button></span>
 
+            <div id="cards-container" class="columns is-multiline">
+
+            </div>
         </div>
     </section>
 
     <section id="carrito" class="section">
         <div class="container">
 
+            <h2 class="title">Carrito</h2>
+
         </div>
     </section>
 
     <section id="contacto" class="section">
         <div class="container">
-            <h2>Contactate con nosotros</h2>
+            <h2 class="title">Contactate con nosotros</h2>
             <form id="formulario-contacto" action="" class="form">
                 <input id="input-nombre" type="text" placeholder="Juan">
                 <input id="input-mail" type="text" placeholder="alguien@example.com">

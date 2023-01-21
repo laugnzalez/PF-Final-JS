@@ -10,14 +10,19 @@ const seccionContacto = document.querySelector("#contacto")
 // ELEMENTOS
 
 const divCarousel = document.querySelector("#carousel")
-const btnHome = document.querySelector("#btnHome")
-const btnProductos = document.querySelector("#btnProductos")
-const btnCheckout = document.querySelector("#btnCheckout")
-const btnContacto = document.querySelector("#btnContacto")
-const divCards = document.querySelector("#cardsContainer")
-
+const btnHome = document.querySelector("#btn-home")
+const btnProductos = document.querySelector("#btn-productos")
+const btnCheckout = document.querySelector("#btn-checkout")
+const btnContacto = document.querySelector("#btn-contacto")
+const divCards = document.querySelector("#cards-container")
+const divMostBuyed = document.querySelector("#most-buyed-container")
+const btnSortUp = document.querySelector("#btn-sort-u")
+const btnSortDown = document.querySelector("#btn-sort-d")
 
 //////////////FUNCIONES GENÉRICAS REUTILIZABLES////////////////
+
+
+// MOSTRAR U OCULTAR ELEMENTOS
 
 let hideElements = (element) => {
     element.style.display = "none"
@@ -26,6 +31,8 @@ let hideElements = (element) => {
 let showElements = (element) => {
     element.style.display = "block"
 }
+
+// FUNCIONES RELACIONADADAS AL MANEJO DEL STORAGE
 
 let nuevoDatoLocal = (clave, valor) => {
     localStorage.setItem(clave, valor)
@@ -43,7 +50,7 @@ let borrarDatoLocal = (clave) => {
 
 // CONSTRUCCION DE LAS CARDS
 
-const cards = (array) => {
+const cards = (array, section) => {
     const nodos = array.reduce((acc, element) => {
         return acc + `
         <div class="column card is-one-quarter">
@@ -72,7 +79,22 @@ const cards = (array) => {
         </div>
 `
     }, "")
-    divCards.innerHTML = nodos
+    section.innerHTML = nodos
+}
+
+// FILTROS ARRAY
+
+const filtrarUp = (array) => {
+    const arrayOrdenado = JSON.parse(JSON.stringify(array)).sort((a, b) =>
+        a.title - b.title)
+        console.log(arrayOrdenado)
+        return arrayOrdenado
+}
+
+const filtrarDown = (array) => {
+    const arrayOrdenado = JSON.parse(JSON.stringify(array)).sort((a, b) =>
+        b.title - a.title)
+        return arrayOrdenado
 }
 
 ///////////// FUNCIONES ESPECIFICAS////////////////////
@@ -141,11 +163,27 @@ const swiper = new Swiper('.swiper', {
     },
 });
 
+// PETICION DE PRODUCTOS MAS COMPRADOS
+
+fetch('https://fakestoreapi.com/products/category/electronics?limit=4')
+    .then(res => res.json())
+    .then(data => {
+        console.log(data)
+        cards(data, divMostBuyed)
+    })
+    .catch((error) => console.log("Oops! Algo salió mal."))
+
 // PETICION DEL ARRAY DE PRODUCTOS
 
 fetch('https://fakestoreapi.com/products')
     .then(res => res.json())
     .then(data => {
-        cards(data)
+        cards(data, divCards)
+        btnSortUp.onclick = () => {
+            cards(filtrarUp(data), divCards)
+        } 
+        btnSortDown.onclick = () => {
+            cards(filtrarDown(data), divCards)
+        } 
     })
     .catch((error) => console.log("Oops! Algo salió mal."))

@@ -1,24 +1,8 @@
 ////////// ELEMENTOS DOM
 
 let body = document.querySelector("body")
-const btnDark = document.querySelector("#btnDark")
-const btnLight = document.querySelector("#btnLight")
-
-////////// FUNCIONES GENERICAS REUTILIZABLES
-
-// let nuevoDatoLocal = (clave, valor) => {
-//     localStorage.setItem(clave, valor)
-// }
-
-// let obtenerDatoLocal = (clave) => {
-//     let datos = localStorage.getItem(clave)
-//     let datosParseados = JSON.parse(datos)
-//     return datosParseados
-// }
-
-// let borrarDatoLocal = (clave) => {
-//     localStorage.clear(clave)
-// }
+const btnDark = document.querySelector("#btn-dark")
+const btnLight = document.querySelector("#btn-light")
 
 ////////// FUNCIONES ESPECIFICAS
 
