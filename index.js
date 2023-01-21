@@ -41,24 +41,70 @@ let borrarDatoLocal = (clave) => {
     localStorage.clear(clave)
 }
 
+// CONSTRUCCION DE LAS CARDS
+
+const cards = (array) => {
+    const nodos = array.reduce((acc, element) => {
+        return acc + `
+        <div class="column card is-one-quarter">
+            <header class="card-header">
+                <p class="card-header-title">
+                    ${element.title}
+                </p>
+            </header>
+
+            <div class="card-image">
+                <figure class="image">
+                    <img src="${element.image}" alt=" ${element.title}">
+                </figure>
+            </div>
+
+            <div class="card-content">
+                <div class="content">
+                    ${element.description}
+                </div>
+            </div>
+
+            <footer class="card-footer">
+                <p class="card-footer-item">$ ${element.price}</p>
+                <button class="card-footer-item has-background-primary">Añadir al carrito</button>
+            </footer>
+        </div>
+`
+    }, "")
+    divCards.innerHTML = nodos
+}
+
 ///////////// FUNCIONES ESPECIFICAS////////////////////
 
 // MOSTRAR U OCULTAR SECCIONES DE LA WEB
 
 btnHome.onclick = () => {
-    hideElements(seccionHome)
+    showElements(seccionHome)
+    hideElements(seccionProductos)
+    hideElements(seccionCarrito)
+    hideElements(seccionContacto)
 }
 
 btnProductos.onclick = () => {
     showElements(seccionProductos)
+    hideElements(seccionHome)
+    hideElements(seccionCarrito)
+    hideElements(seccionContacto)
 }
 
 btnCheckout.onclick = () => {
     showElements(seccionCarrito)
+    hideElements(seccionHome)
+    hideElements(seccionProductos)
+    hideElements(seccionContacto)
 }
 
 btnContacto.onclick = () => {
     showElements(seccionContacto)
+    hideElements(seccionHome)
+    hideElements(seccionProductos)
+    hideElements(seccionCarrito)
 }
 
 // HTML CAROUSEL 
@@ -94,41 +140,6 @@ const swiper = new Swiper('.swiper', {
         el: '.swiper-pagination',
     },
 });
-
-
-//CONSTRUCCION DE LAS CARDS CON LOS PRODUCTOS
-
-const cards = (array) => {
-    const nodos = array.reduce((acc, element) => {
-        return acc + `
-        <div class="column card is-one-quarter">
-            <header class="card-header">
-                <p class="card-header-title">
-                    ${element.title}
-                </p>
-            </header>
-
-            <div class="card-image">
-                <figure class="image">
-                    <img src="${element.image}" alt=" ${element.title}">
-                </figure>
-            </div>
-
-            <div class="card-content">
-                <div class="content">
-                    ${element.description}
-                </div>
-            </div>
-
-            <footer class="card-footer">
-                <p class="card-footer-item">$ ${element.price}</p>
-                <button class="card-footer-item has-background-primary">Añadir al carrito</button>
-            </footer>
-        </div>
-`
-    }, "")
-    divCards.innerHTML = nodos
-}
 
 // PETICION DEL ARRAY DE PRODUCTOS
 
