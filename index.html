@@ -8,6 +8,7 @@
     <title>Compra-ME</title>
     <link rel="stylesheet" href="css/estilos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
 </head>
 
@@ -99,8 +100,12 @@
     <section id="productos" class="section">
         <div class="container">
             <h2 class="title">Todos nuestros productos</h2>
-            <span ><button id="btn-sort-u" class="button is-primary">A-Z</button></span>
-            <span><button id="btn-sort-d" class="button is-primary">Z-A</button></span>
+            <span>
+                <button id="btn-sort-u" class="button is-primary">A-Z</button>
+            </span>
+            <span>
+                <button id="btn-sort-d" class="button is-primary">Z-A</button>
+            </span>
 
             <div id="cards-container" class="columns is-multiline">
 
@@ -112,7 +117,9 @@
         <div class="container">
 
             <h2 class="title">Carrito</h2>
-
+            <span>
+                <button id="delete-cart" class="button is-primary">Borrar carrito</button>
+            </span>
         </div>
     </section>
 
@@ -135,6 +142,7 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="index.js"></script>
     <script src="theme.js"></script>
 

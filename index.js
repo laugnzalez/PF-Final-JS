@@ -18,6 +18,7 @@ const divCards = document.querySelector("#cards-container")
 const divMostBuyed = document.querySelector("#most-buyed-container")
 const btnSortUp = document.querySelector("#btn-sort-u")
 const btnSortDown = document.querySelector("#btn-sort-d")
+const btnAddCart = document.querySelectorAll(".btn-add-cart")
 
 //////////////FUNCIONES GENÉRICAS REUTILIZABLES////////////////
 
@@ -74,7 +75,7 @@ const cards = (array, section) => {
 
             <footer class="card-footer">
                 <p class="card-footer-item">$ ${element.price}</p>
-                <button class="card-footer-item has-background-primary">Añadir al carrito</button>
+                <button class="card-footer-item has-background-primary btn-add-cart">Añadir al carrito</button>
             </footer>
         </div>
 `
@@ -187,3 +188,21 @@ fetch('https://fakestoreapi.com/products')
         } 
     })
     .catch((error) => console.log("Oops! Algo salió mal."))
+
+// AÑADIR AL CARRITO
+
+btnAddCart.onclick = () => {
+    Toastify({
+    text: "Añadiste un producto al carrito",
+    duration: 3000,
+    newWindow: true,
+    close: true,
+    gravity: "bottom",
+    position: "right",
+    stopOnFocus: true,
+  }).showToast();
+  console.log("Hola, me hiciste click")
+}
+
+// TOASTIFY ADD TO CART
+
