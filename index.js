@@ -10,15 +10,24 @@ const seccionContacto = document.querySelector("#contacto")
 // ELEMENTOS
 
 const divCarousel = document.querySelector("#carousel")
+
+// BOTONES NAV
+
 const btnHome = document.querySelector("#btn-home")
 const btnProductos = document.querySelector("#btn-productos")
 const btnCheckout = document.querySelector("#btn-checkout")
 const btnContacto = document.querySelector("#btn-contacto")
+
+// DOM CARDS
+
 const divCards = document.querySelector("#cards-container")
 const divMostBuyed = document.querySelector("#most-buyed-container")
+const divCarrito = document.querySelector("#container-carrito")
+
+// BOTONES SORT
+
 const btnSortUp = document.querySelector("#btn-sort-u")
 const btnSortDown = document.querySelector("#btn-sort-d")
-const btnAddCart = document.querySelectorAll(".btn-add-cart")
 
 //////////////FUNCIONES GENÉRICAS REUTILIZABLES////////////////
 
@@ -75,7 +84,7 @@ const cards = (array, section) => {
 
             <footer class="card-footer">
                 <p class="card-footer-item">$ ${element.price}</p>
-                <button class="card-footer-item has-background-primary btn-add-cart">Añadir al carrito</button>
+                <button id="boton-${element.id} class="button card-footer-item has-background-primary btn-add-cart">Añadir al carrito</button>
             </footer>
         </div>
 `
@@ -86,16 +95,17 @@ const cards = (array, section) => {
 // FILTROS ARRAY
 
 const filtrarUp = (array) => {
-    const arrayOrdenado = JSON.parse(JSON.stringify(array)).sort((a, b) =>
+    const arrayUp = JSON.parse(JSON.stringify(array)).sort((a, b) =>
         a.title - b.title)
-        console.log(arrayOrdenado)
-        return arrayOrdenado
+        console.log(arrayUp)
+        return arrayUp
 }
 
 const filtrarDown = (array) => {
-    const arrayOrdenado = JSON.parse(JSON.stringify(array)).sort((a, b) =>
+    const arrayDown = JSON.parse(JSON.stringify(array)).sort((a, b) =>
         b.title - a.title)
-        return arrayOrdenado
+        console.log(arrayDown)
+        return arrayDown
 }
 
 ///////////// FUNCIONES ESPECIFICAS////////////////////
@@ -169,8 +179,9 @@ const swiper = new Swiper('.swiper', {
 fetch('https://fakestoreapi.com/products/category/electronics?limit=4')
     .then(res => res.json())
     .then(data => {
-        console.log(data)
+
         cards(data, divMostBuyed)
+
     })
     .catch((error) => console.log("Oops! Algo salió mal."))
 
@@ -180,29 +191,14 @@ fetch('https://fakestoreapi.com/products')
     .then(res => res.json())
     .then(data => {
         cards(data, divCards)
+
         btnSortUp.onclick = () => {
             cards(filtrarUp(data), divCards)
-        } 
+        }
+
         btnSortDown.onclick = () => {
             cards(filtrarDown(data), divCards)
-        } 
+        }
+
     })
     .catch((error) => console.log("Oops! Algo salió mal."))
-
-// AÑADIR AL CARRITO
-
-btnAddCart.onclick = () => {
-    Toastify({
-    text: "Añadiste un producto al carrito",
-    duration: 3000,
-    newWindow: true,
-    close: true,
-    gravity: "bottom",
-    position: "right",
-    stopOnFocus: true,
-  }).showToast();
-  console.log("Hola, me hiciste click")
-}
-
-// TOASTIFY ADD TO CART
-

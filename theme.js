@@ -4,8 +4,6 @@ let body = document.querySelector("body")
 const btnDark = document.querySelector("#btn-dark")
 const btnLight = document.querySelector("#btn-light")
 
-////////// FUNCIONES ESPECIFICAS
-
 // GENERA EL TEMA CLARO
 
 const goLight = () => {
