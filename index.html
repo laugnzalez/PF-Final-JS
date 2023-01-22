@@ -118,7 +118,7 @@
 
             <h2 class="title">Carrito</h2>
             <span>
-                <button id="delete-cart" class="button is-primary">Borrar carrito</button>
+                <button id="delete-cart" class="button is-primary">Eliminar todos los productos del carrito</button>
             </span>
 
             <div id="container-carrito">
@@ -131,11 +131,34 @@
         <div class="container">
             <h2 class="title">Contactate con nosotros</h2>
             <form id="formulario-contacto" action="" class="form">
-                <input id="input-nombre" type="text" placeholder="Juan">
-                <input id="input-mail" type="text" placeholder="alguien@example.com">
-                <input id="input-comment" type="text" placeholder="Dejanos lo que quieras!">
-                <input id="envio-formulario" type="submit" value="Enviar">
-            </form>
+                <div class="field">
+                    <label for="input-nombre" class="label">Nombre</label>
+                    <div class="control">
+                        <input class="input" id="input-nombre" type="text" placeholder="Juan">
+                        <p id="error-nombre" class="help is-danger">Ingresa un nombre válido</p>
+                    </div>
+                </div>
+
+                <label for="input-mail" class="label">Mail</label>
+                <div class="control">
+                    <input class="input" id="input-mail" type="text" placeholder="alguien@example.com">
+                    <p id="error-mail" class="help is-danger">Ingresa un email válido. Recorda que debe tener @.</p>
+                </div>
+        </div>
+
+        <label for="input-comment" class="label">Comentarios</label>
+        <div class="control">
+            <input class="input" id="input-comment" type="text" placeholder="Dejanos lo que quieras!">
+            <p id="error-comment" class="help is-danger">Los comentarios deben tener mas de 2 caracteres y no más de 150 caracteres.</p>
+        </div>
+        </div>
+
+        </div>
+        <div class="control">
+            <input class="button is-primary" id="envio-formulario" type="submit" value="Enviar">
+        </div>
+
+        </form>
         </div>
     </section>
 
@@ -150,6 +173,7 @@
     <script src="index.js"></script>
     <script src="theme.js"></script>
     <script src="carrito.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </body>
 

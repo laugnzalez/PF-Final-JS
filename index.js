@@ -29,6 +29,17 @@ const divCarrito = document.querySelector("#container-carrito")
 const btnSortUp = document.querySelector("#btn-sort-u")
 const btnSortDown = document.querySelector("#btn-sort-d")
 
+// DOM FORMULARIO DE CONTACTO
+
+const formulario = document.querySelector("#formulario-contacto")
+const btnSubmit = document.querySelector("#envio-formulario")
+const inputNombre = document.querySelector("#input-nombre")
+const inputMail = document.querySelector("#input-mail")
+const inputComentario = document.querySelector("#input-comment")
+const errorNombre = document.querySelector("#error-nombre")
+const errorMail = document.querySelector("#error-mail")
+const errorComentario = document.querySelector("#error-comment")
+
 //////////////FUNCIONES GENÉRICAS REUTILIZABLES////////////////
 
 
@@ -63,7 +74,7 @@ let borrarDatoLocal = (clave) => {
 const cards = (array, section) => {
     const nodos = array.reduce((acc, element) => {
         return acc + `
-        <div class="column card is-one-quarter">
+        <div class="column card is-one-quarter id="producto-${element.id}">
             <header class="card-header">
                 <p class="card-header-title">
                     ${element.title}
@@ -84,7 +95,7 @@ const cards = (array, section) => {
 
             <footer class="card-footer">
                 <p class="card-footer-item">$ ${element.price}</p>
-                <button id="boton-${element.id} class="button card-footer-item has-background-primary btn-add-cart">Añadir al carrito</button>
+                <button id="boton-${element.id}" class="btn-add-cart button card-footer-item has-background-primary">Añadir al carrito</button>
             </footer>
         </div>
 `
@@ -179,8 +190,9 @@ const swiper = new Swiper('.swiper', {
 fetch('https://fakestoreapi.com/products/category/electronics?limit=4')
     .then(res => res.json())
     .then(data => {
-
         cards(data, divMostBuyed)
+        const botonAdd = document.querySelectorAll(".btn-add-cart")    
+        aniadirAlCarrito(data, botonAdd)
 
     })
     .catch((error) => console.log("Oops! Algo salió mal."))
@@ -191,10 +203,16 @@ fetch('https://fakestoreapi.com/products')
     .then(res => res.json())
     .then(data => {
         cards(data, divCards)
+        const botonAdd = document.querySelectorAll(".btn-add-cart")
+        aniadirAlCarrito(data, botonAdd)
+
+        const btnSortUp = document.querySelector("#btn-sort-u")
 
         btnSortUp.onclick = () => {
             cards(filtrarUp(data), divCards)
         }
+
+        const btnSortDown = document.querySelector("#btn-sort-d")
 
         btnSortDown.onclick = () => {
             cards(filtrarDown(data), divCards)
@@ -202,3 +220,44 @@ fetch('https://fakestoreapi.com/products')
 
     })
     .catch((error) => console.log("Oops! Algo salió mal."))
+
+// AÑADIR PRODUCTOS AL CARRITO
+
+let carrito = []
+
+function aniadirAlCarrito (array, boton) {
+    boton.forEach( boton => {
+        boton.onclick = () => {
+            const id = boton.id.slice()
+            const filtrarProducto = array.find((element) => {
+                return element.id === Number(id)
+            }) ////EL PROBLEMA ESTA ACAAAAAAAAA XQ NO MUESTRA LOS PRODUCTOS TIRA UNDEFINED
+            carrito.push(filtrarProducto)   
+            console.log(carrito)
+            localStorage.setItem("carrito", JSON.stringify(carrito))   
+        }
+
+    })
+}
+
+const productosElegidos = JSON.parse(localStorage.getItem("carrito"))
+carrito = productosElegidos || []
+
+// VALIDACION DEL FORM
+
+formulario.onsubmit = (e) => {
+    e.preventDefault()
+    if ( inputNombre.value.length > 2 && inputMail.value.match(/[@]/) && 2 < inputComentario.value.length < 150 ) {
+        swal("Enhorabuena!", "Tu comentario fue enviado con éxito. Pronto recibiras una respuesta por mail.", "success");      
+    } else {
+        if (inputNombre.value.length < 2) {
+            showElements(errorNombre)
+        }
+        if (inputMail.value != (/[@]/)) {
+            showElements(errorMail)        
+        }
+        if (2 > inputComentario.value.length > 150) {
+            showElements(errorComentario)
+        }
+    }
+}
