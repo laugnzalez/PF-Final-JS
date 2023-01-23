@@ -194,7 +194,6 @@ fetch('https://fakestoreapi.com/products')
         addToCarrito(data)
         
     })
-    .catch((error) => console.log("Oops! Algo salió mal."))
 
 // PETICION DE PRODUCTOS MAS COMPRADOS
 
@@ -203,7 +202,6 @@ fetch('https://fakestoreapi.com/products/category/electronics?limit=4')
     .then(array => {
         cards(array, divMostBuyed)
         addToCarrito(array)
-
     })
 
 
@@ -219,8 +217,7 @@ function addToCarrito (array) {
             const filtrarProducto = array.find((elemento) => {
                 return elemento.id === Number(id)
             })
-            carrito.push(filtrarProducto)   
-            console.log(carrito)
+            carrito.push(filtrarProducto)
             localStorage.setItem("carrito", JSON.stringify(carrito))   
         }
         
