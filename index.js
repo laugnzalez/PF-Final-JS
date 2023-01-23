@@ -185,58 +185,45 @@ const swiper = new Swiper('.swiper', {
     },
 });
 
-// PETICION DE PRODUCTOS MAS COMPRADOS
-
-fetch('https://fakestoreapi.com/products/category/electronics?limit=4')
-    .then(res => res.json())
-    .then(data => {
-        cards(data, divMostBuyed)
-        const botonAdd = document.querySelectorAll(".btn-add-cart")    
-        aniadirAlCarrito(data, botonAdd)
-
-    })
-    .catch((error) => console.log("Oops! Algo salió mal."))
-
 // PETICION DEL ARRAY DE PRODUCTOS
 
 fetch('https://fakestoreapi.com/products')
     .then(res => res.json())
     .then(data => {
         cards(data, divCards)
-        const botonAdd = document.querySelectorAll(".btn-add-cart")
-        aniadirAlCarrito(data, botonAdd)
-
-        const btnSortUp = document.querySelector("#btn-sort-u")
-
-        btnSortUp.onclick = () => {
-            cards(filtrarUp(data), divCards)
-        }
-
-        const btnSortDown = document.querySelector("#btn-sort-d")
-
-        btnSortDown.onclick = () => {
-            cards(filtrarDown(data), divCards)
-        }
-
+        addToCarrito(data)
+        
     })
     .catch((error) => console.log("Oops! Algo salió mal."))
+
+// PETICION DE PRODUCTOS MAS COMPRADOS
+
+fetch('https://fakestoreapi.com/products/category/electronics?limit=4')
+    .then(res => res.json())
+    .then(array => {
+        cards(array, divMostBuyed)
+        addToCarrito(array)
+
+    })
+
 
 // AÑADIR PRODUCTOS AL CARRITO
 
 let carrito = []
 
-function aniadirAlCarrito (array, boton) {
-    boton.forEach( boton => {
+function addToCarrito (array) {
+    const btnAdd = document.querySelectorAll(".btn-add-cart")    
+    btnAdd.forEach( boton => {
         boton.onclick = () => {
-            const id = boton.id.slice()
-            const filtrarProducto = array.find((element) => {
-                return element.id === Number(id)
-            }) ////EL PROBLEMA ESTA ACAAAAAAAAA XQ NO MUESTRA LOS PRODUCTOS TIRA UNDEFINED
+            const id = boton.id.slice(6)
+            const filtrarProducto = array.find((elemento) => {
+                return elemento.id === Number(id)
+            })
             carrito.push(filtrarProducto)   
             console.log(carrito)
             localStorage.setItem("carrito", JSON.stringify(carrito))   
         }
-
+        
     })
 }
 
