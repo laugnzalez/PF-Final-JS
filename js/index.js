@@ -24,10 +24,6 @@ const divCards = document.querySelector("#cards-container")
 const divMostBuyed = document.querySelector("#most-buyed-container")
 const divCarrito = document.querySelector("#container-carrito")
 
-// BOTONES SORT
-
-const btnSortUp = document.querySelector("#btn-sort-u")
-const btnSortDown = document.querySelector("#btn-sort-d")
 
 // DOM FORMULARIO DE CONTACTO
 
@@ -106,17 +102,24 @@ const cards = (array, section) => {
 // FILTROS ARRAY
 
 const filtrarUp = (array) => {
-    const arrayUp = JSON.parse(JSON.stringify(array)).sort((a, b) =>
-        a.title - b.title)
-        console.log(arrayUp)
-        return arrayUp
+    const btnSortUp = document.querySelector("#btn-sort-u")
+    btnSortUp.onclick = () => {
+
+        const arrayUp = JSON.parse(JSON.stringify(array)).sort((a, b) =>
+            a.title - b.title)
+            return arrayUp
+    }
 }
 
 const filtrarDown = (array) => {
-    const arrayDown = JSON.parse(JSON.stringify(array)).sort((a, b) =>
-        b.title - a.title)
-        console.log(arrayDown)
-        return arrayDown
+    const btnSortDown = document.querySelector("#btn-sort-d")
+    btnSortDown.onclick = () => {
+
+        const arrayDown = JSON.parse(JSON.stringify(array)).sort((a, b) =>
+            b.title - a.title)
+            console.log(arrayDown)
+            return arrayDown
+    }
 }
 
 ///////////// FUNCIONES ESPECIFICAS////////////////////
@@ -192,7 +195,8 @@ fetch('https://fakestoreapi.com/products')
     .then(data => {
         cards(data, divCards)
         addToCarrito(data)
-        
+        filtrarUp()
+        filtrarDown()
     })
 
 // PETICION DE PRODUCTOS MAS COMPRADOS

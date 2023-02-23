@@ -44,8 +44,7 @@ function borrarDelCarrito (array) {
                 return elemento.id != Number(id)
             })
             infoDelLs = filtrarProducto
-            localStorage.setItem("carrito", JSON.stringify(infoDelLs))
-            console.log(infoDelLs)    
+            localStorage.setItem("carrito", JSON.stringify(infoDelLs))   
             cardHtml(infoDelLs)
             borrarDelCarrito(infoDelLs)       
         }
@@ -61,5 +60,4 @@ botonBorrarCarrito.onclick = () => {
     localStorage.removeItem("carrito")
     carrito = []
     document.querySelector(".carrito-contenedor").innerHTML = "no hay productos"
-    console.log("me clickeaste")
 }
