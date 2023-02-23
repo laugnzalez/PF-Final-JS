@@ -265,9 +265,9 @@ fetch('https://fakestoreapi.com/products')
 
         addToCarrito(data)
 
-        filtrarUp()
+        filtrarUp(data)
 
-        filtrarDown()
+        filtrarDown(data)
 
     })
 
